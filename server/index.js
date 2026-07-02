@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 const db = require('./db');
 
 const app = express();
@@ -569,6 +570,17 @@ app.put('/api/verifications/:employeeId', checkHRRole, (req, res) => {
       });
     }
   );
+});
+
+// Serve static assets from the React frontend build folder
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// Fallback all non-API GET requests to React's index.html
+app.get('*', (req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    return res.status(404).json({ error: 'API route not found' });
+  }
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 app.listen(PORT, () => {

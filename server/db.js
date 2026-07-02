@@ -1,14 +1,105 @@
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'empnexus.db');
 
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error("Database connection failed:", err.message);
-  } else {
-    console.log("Connected to SQLite database at:", dbPath);
+let db;
+
+if (process.env.TURSO_DATABASE_URL) {
+  console.log("Connecting to Turso Cloud SQLite database...");
+  const { createClient } = require('@libsql/client');
+  const client = createClient({
+    url: process.env.TURSO_DATABASE_URL,
+    authToken: process.env.TURSO_AUTH_TOKEN
+  });
+
+  class LibsqlDbWrapper {
+    constructor(client) {
+      this.client = client;
+    }
+
+    serialize(callback) {
+      callback();
+    }
+
+    async _query(method, sql, params, callback) {
+      if (typeof params === 'function') {
+        callback = params;
+        params = [];
+      }
+
+      try {
+        const result = await this.client.execute({ sql, args: params || [] });
+        const rows = result.rows.map(row => ({ ...row }));
+
+        if (method === 'get') {
+          const row = rows[0] || null;
+          if (callback) callback(null, row);
+        } else if (method === 'all') {
+          if (callback) callback(null, rows);
+        } else {
+          // run
+          const context = {
+            lastID: result.lastInsertRowid ? result.lastInsertRowid.toString() : null,
+            changes: Number(result.rowsAffected)
+          };
+          if (callback) callback.call(context, null);
+        }
+      } catch (err) {
+        if (callback) callback(err);
+        else console.error("Database query error:", err);
+      }
+    }
+
+    run(sql, params, callback) {
+      this._query('run', sql, params, callback);
+    }
+
+    get(sql, params, callback) {
+      this._query('get', sql, params, callback);
+    }
+
+    all(sql, params, callback) {
+      this._query('all', sql, params, callback);
+    }
+
+    prepare(sql) {
+      const client = this.client;
+      const paramsList = [];
+      return {
+        run: (...args) => {
+          // If first arg is an array, expand it
+          if (Array.isArray(args[0])) {
+            paramsList.push(args[0]);
+          } else {
+            paramsList.push(args);
+          }
+        },
+        finalize: async (callback) => {
+          try {
+            for (const params of paramsList) {
+              await client.execute({ sql, args: params });
+            }
+            if (callback) callback(null);
+          } catch (err) {
+            if (callback) callback(err);
+            else console.error("Statement execution failed:", err);
+          }
+        }
+      };
+    }
   }
-});
+
+  db = new LibsqlDbWrapper(client);
+} else {
+  console.log("Connecting to local SQLite database...");
+  const sqlite3 = require('sqlite3').verbose();
+  db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error("Database connection failed:", err.message);
+    } else {
+      console.log("Connected to SQLite database at:", dbPath);
+    }
+  });
+}
 
 db.serialize(() => {
   // 1. Employees Table

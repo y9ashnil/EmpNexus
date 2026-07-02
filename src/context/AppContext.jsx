@@ -241,7 +241,7 @@ const initialVerifications = [
 ];
 
 export const AppStateProvider = ({ children }) => {
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+  const API_URL = import.meta.env.VITE_API_URL || '/api';
 
   const [employees, setEmployees] = useState([]);
   const [tasks, setTasks] = useState([]);

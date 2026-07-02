@@ -78,7 +78,7 @@ export default function AdminDashboard({ activeTab }) {
       const fetchLogs = async () => {
         setLoadingAudit(true);
         try {
-          const res = await fetch('http://localhost:5001/api/admin/audit-logs', {
+          const res = await fetch('/api/admin/audit-logs', {
             headers: {
               'x-user-role': currentUser?.role || '',
               'x-user-email': currentUser?.email || ''
