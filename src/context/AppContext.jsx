@@ -253,7 +253,7 @@ export const AppStateProvider = ({ children }) => {
   const [interviews, setInterviews] = useState([]);
   const [verifications, setVerifications] = useState([]);
   const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('ems_current_user');
+    const saved = sessionStorage.getItem('ems_current_user');
     return saved ? JSON.parse(saved) : null;
   });
 
@@ -347,13 +347,12 @@ export const AppStateProvider = ({ children }) => {
 
   useEffect(() => {
     if (currentUser) {
-      localStorage.setItem('ems_current_user', JSON.stringify(currentUser));
+      sessionStorage.setItem('ems_current_user', JSON.stringify(currentUser));
     } else {
-      localStorage.removeItem('ems_current_user');
+      sessionStorage.removeItem('ems_current_user');
     }
   }, [currentUser]);
 
-  // Sync state instantly across multiple browser tabs/portals
   useEffect(() => {
     const handleStorageChange = (e) => {
       try {
@@ -367,7 +366,6 @@ export const AppStateProvider = ({ children }) => {
         if (e.key === 'ems_candidates') setCandidates(JSON.parse(e.newValue));
         if (e.key === 'ems_interviews') setInterviews(JSON.parse(e.newValue));
         if (e.key === 'ems_verifications') setVerifications(JSON.parse(e.newValue));
-        if (e.key === 'ems_current_user') setCurrentUser(JSON.parse(e.newValue));
       } catch (err) {
         console.error("Failed to parse cross-tab storage sync:", err);
       }
