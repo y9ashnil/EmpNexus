@@ -589,7 +589,7 @@ export default function HRDashboard({ activeTab }) {
                       </div>
                     </td>
                     <td>{emp.department} - {emp.designation}</td>
-                    <td><strong>${emp.salary.toLocaleString()}/mo</strong></td>
+                    <td><strong>₹{emp.salary.toLocaleString()}/mo</strong></td>
                     <td>
                       <button 
                         onClick={() => {
@@ -660,7 +660,7 @@ export default function HRDashboard({ activeTab }) {
                   className="form-input" 
                   value={jobSalary} 
                   onChange={(e) => setJobSalary(e.target.value)} 
-                  placeholder="e.g. $6,000 - $8,500" 
+                  placeholder="e.g. ₹6,000 - ₹8,500" 
                   required 
                 />
               </div>
@@ -774,7 +774,7 @@ export default function HRDashboard({ activeTab }) {
               </div>
 
               <div className="form-group">
-                <label className="form-label">New Monthly Base Salary ($)</label>
+                <label className="form-label">New Monthly Base Salary (₹)</label>
                 <input 
                   type="number" 
                   className="form-input" 

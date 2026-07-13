@@ -148,7 +148,7 @@ You have clocked in present ${presentCount} times in the database history logs.`
         }
       } 
       else if (cleanQuery.includes('salary') || cleanQuery.includes('pay') || cleanQuery.includes('money') || cleanQuery.includes('slip') || cleanQuery.includes('compensation')) {
-        response = `Your base salary is $${currentUser.salary.toLocaleString()}/month. A total of ${userPayslips.length} payslips have been released by HR. You can view/print statements in the "Salary Ledger" tab.`;
+        response = `Your base salary is ₹${currentUser.salary.toLocaleString()}/month. A total of ${userPayslips.length} payslips have been released by HR. You can view/print statements in the "Salary Ledger" tab.`;
       } 
       else if (cleanQuery.includes('help') || cleanQuery.includes('hi') || cleanQuery.includes('hello') || cleanQuery.includes('hey')) {
         response = `Hi! I am here to help you navigate EmpNexus. You can ask me:
@@ -292,7 +292,7 @@ You have clocked in present ${presentCount} times in the database history logs.`
         <div className="stat-card glass-panel info">
           <div className="stat-info">
             <span className="stat-label">Base Compensation</span>
-            <span className="stat-value">${currentUser.salary.toLocaleString()}</span>
+            <span className="stat-value">₹{currentUser.salary.toLocaleString()}</span>
           </div>
           <div className="stat-icon-wrapper">
             <CircleDollarSign size={22} style={{ color: 'var(--color-success)' }} />
@@ -566,7 +566,7 @@ You have clocked in present ${presentCount} times in the database history logs.`
                     <tr key={ps.id}>
                       <td><span style={{ fontFamily: 'monospace', color: 'var(--color-accent)' }}>{ps.id}</span></td>
                       <td><strong>{ps.month}</strong></td>
-                      <td><strong style={{ color: 'var(--color-success)' }}>${ps.netSalary.toLocaleString()}</strong></td>
+                      <td><strong style={{ color: 'var(--color-success)' }}>₹{ps.netSalary.toLocaleString()}</strong></td>
                       <td>{ps.releasedOn}</td>
                       <td>
                         <button 
@@ -636,19 +636,19 @@ You have clocked in present ${presentCount} times in the database history logs.`
               <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.75rem' }}>
                 <div className="payslip-row">
                   <span style={{ color: 'var(--text-muted)' }}>Base Compensation (+)</span>
-                  <span>${viewingPayslip.baseSalary.toLocaleString()}</span>
+                  <span>₹{viewingPayslip.baseSalary.toLocaleString()}</span>
                 </div>
                 <div className="payslip-row">
                   <span style={{ color: 'var(--text-muted)' }}>Performance Bonus (+)</span>
-                  <span style={{ color: 'var(--color-success)' }}>+${viewingPayslip.bonus.toLocaleString()}</span>
+                  <span style={{ color: 'var(--color-success)' }}>+₹{viewingPayslip.bonus.toLocaleString()}</span>
                 </div>
                 <div className="payslip-row" style={{ paddingBottom: '0.75rem' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Regulatory Deductions (-)</span>
-                  <span style={{ color: 'var(--color-danger)' }}>-${viewingPayslip.deductions.toLocaleString()}</span>
+                  <span style={{ color: 'var(--color-danger)' }}>-₹{viewingPayslip.deductions.toLocaleString()}</span>
                 </div>
                 <div className="payslip-row payslip-total">
                   <span>NET DISBURSED COMP</span>
-                  <span>${viewingPayslip.netSalary.toLocaleString()}</span>
+                  <span>₹{viewingPayslip.netSalary.toLocaleString()}</span>
                 </div>
               </div>
             </div>

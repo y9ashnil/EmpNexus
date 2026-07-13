@@ -152,21 +152,21 @@ const initialJobs = [
     title: 'Lead Frontend Developer',
     department: 'Engineering',
     status: 'open',
-    salaryRange: '$7,000 - $10,000'
+    salaryRange: '₹7,000 - ₹10,000'
   },
   {
     id: 'JOB-902',
     title: 'Senior Product Designer',
     department: 'Design',
     status: 'open',
-    salaryRange: '$6,500 - $9,000'
+    salaryRange: '₹6,500 - ₹9,000'
   },
   {
     id: 'JOB-903',
     title: 'HR Operations Coordinator',
     department: 'Human Resources',
     status: 'closed',
-    salaryRange: '$4,500 - $6,000'
+    salaryRange: '₹4,500 - ₹6,000'
   }
 ];
 

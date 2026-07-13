@@ -262,8 +262,8 @@ db.serialize(() => {
 
       // Seed Jobs
       const jStmt = db.prepare(`INSERT INTO jobs VALUES (?, ?, ?, ?, ?)`);
-      jStmt.run('JOB-501', 'Senior Backend Engineer', 'Engineering', '$7,000 - $9,500', 'open');
-      jStmt.run('JOB-502', 'Lead UI/UX Designer', 'Design', '$6,500 - $8,500', 'open');
+      jStmt.run('JOB-501', 'Senior Backend Engineer', 'Engineering', '₹7,000 - ₹9,500', 'open');
+      jStmt.run('JOB-502', 'Lead UI/UX Designer', 'Design', '₹6,500 - ₹8,500', 'open');
       jStmt.finalize();
 
       // Seed Candidates
