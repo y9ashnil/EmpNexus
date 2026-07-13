@@ -626,6 +626,21 @@ export const AppStateProvider = ({ children }) => {
     }
   };
 
+  const deleteJob = async (jobId) => {
+    try {
+      await fetch(`${API_URL}/jobs/${jobId}`, {
+        method: 'DELETE',
+        headers: { 
+          'x-user-role': currentUser?.role || '',
+          'x-user-email': currentUser?.email || ''
+        }
+      });
+      setJobs(prev => prev.filter(j => j.id !== jobId));
+    } catch (err) {
+      console.error("Delete job failed:", err);
+    }
+  };
+
   const addCandidate = async (candData) => {
     try {
       const res = await fetch(`${API_URL}/candidates`, {
@@ -747,6 +762,7 @@ export const AppStateProvider = ({ children }) => {
         releasePayslip,
         addJob,
         toggleJobStatus,
+        deleteJob,
         addCandidate,
         updateCandidateStatus,
         scheduleInterview,

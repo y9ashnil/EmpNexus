@@ -12,7 +12,8 @@ import {
   Check, 
   Eye, 
   AlertTriangle,
-  Briefcase
+  Briefcase,
+  Trash2
 } from 'lucide-react';
 
 export default function HRDashboard({ activeTab }) {
@@ -24,6 +25,7 @@ export default function HRDashboard({ activeTab }) {
     verifications,
     addJob,
     toggleJobStatus,
+    deleteJob,
     addCandidate,
     updateCandidateStatus,
     scheduleInterview,
@@ -221,13 +223,27 @@ export default function HRDashboard({ activeTab }) {
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                     <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>Salary: <strong>{job.salaryRange}</strong></span>
-                    <button 
-                      className="btn btn-secondary" 
-                      onClick={() => toggleJobStatus(job.id)}
-                      style={{ padding: '4px 8px', fontSize: '0.7rem' }}
-                    >
-                      Toggle Status
-                    </button>
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <button 
+                        className="btn btn-secondary" 
+                        onClick={() => toggleJobStatus(job.id)}
+                        style={{ padding: '4px 8px', fontSize: '0.7rem' }}
+                      >
+                        Toggle Status
+                      </button>
+                      <button 
+                        className="btn btn-danger btn-icon"
+                        onClick={() => {
+                          if (confirm(`Are you sure you want to delete the job opening for ${job.title}?`)) {
+                            deleteJob(job.id);
+                          }
+                        }}
+                        style={{ padding: '4px 8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        title="Delete Opening"
+                      >
+                        <Trash2 size={12} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

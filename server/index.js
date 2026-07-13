@@ -461,6 +461,15 @@ app.put('/api/jobs/:id/status', checkHRRole, (req, res) => {
   );
 });
 
+app.delete('/api/jobs/:id', checkHRRole, (req, res) => {
+  const { id } = req.params;
+
+  db.run("DELETE FROM jobs WHERE id = ?", [id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, message: `Job ${id} deleted successfully.` });
+  });
+});
+
 // 8. Recruitment: Candidates
 app.get('/api/candidates', (req, res) => {
   db.all("SELECT * FROM candidates", [], (err, rows) => {
