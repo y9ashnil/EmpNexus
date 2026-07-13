@@ -69,32 +69,7 @@ export default function AdminDashboard({ activeTab }) {
   const [payBonus, setPayBonus] = useState(0);
   const [payDeductions, setPayDeductions] = useState(0);
 
-  // System Audit Trail States
-  const [auditLogs, setAuditLogs] = useState([]);
-  const [loadingAudit, setLoadingAudit] = useState(false);
 
-  useEffect(() => {
-    if (activeTab === 'audit') {
-      const fetchLogs = async () => {
-        setLoadingAudit(true);
-        try {
-          const res = await fetch('/api/admin/audit-logs', {
-            headers: {
-              'x-user-role': currentUser?.role || '',
-              'x-user-email': currentUser?.email || ''
-            }
-          });
-          const data = await res.json();
-          setAuditLogs(Array.isArray(data) ? data : []);
-        } catch (err) {
-          console.error("Failed to load audit trail:", err);
-        } finally {
-          setLoadingAudit(false);
-        }
-      };
-      fetchLogs();
-    }
-  }, [activeTab, currentUser]);
 
   // Helper: Get employee name by ID
   const getEmpName = (id) => {
@@ -1210,57 +1185,6 @@ export default function AdminDashboard({ activeTab }) {
         );
       })()}
 
-      {activeTab === 'audit' && (
-        <div className="fade-in">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-            <div>
-              <h1 style={{ fontSize: '1.75rem', fontWeight: 700 }}>System Audit Trail</h1>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Secured access records and operational log events</p>
-            </div>
-          </div>
-
-          <div className="glass-panel section-card" style={{ padding: '1.5rem' }}>
-            {loadingAudit ? (
-              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                Loading system audit logs...
-              </div>
-            ) : auditLogs.length === 0 ? (
-              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                No operations logged in the database yet.
-              </div>
-            ) : (
-              <div style={{ overflowX: 'auto' }}>
-                <table className="custom-table">
-                  <thead>
-                    <tr>
-                      <th>Event ID</th>
-                      <th>Operator</th>
-                      <th>Action Performed</th>
-                      <th>IP Source</th>
-                      <th>Timestamp</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {auditLogs.map((log) => (
-                      <tr key={log.id}>
-                        <td style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--color-primary)', fontWeight: 600 }}>{log.id}</td>
-                        <td>
-                          <strong>{log.operatorEmail}</strong>
-                        </td>
-                        <td style={{ color: 'var(--text-main)', fontSize: '0.85rem' }}>{log.action}</td>
-                        <td style={{ fontFamily: 'monospace', fontSize: '0.75rem' }}>{log.ipAddress}</td>
-                        <td style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                          {new Date(log.timestamp).toLocaleString()}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* ======================================= */}
       {/* 1. MODAL: ADD / EDIT EMPLOYEE */}

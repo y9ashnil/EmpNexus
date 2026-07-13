@@ -29,7 +29,6 @@ export default function Sidebar({ activeTab, setActiveTab, sidebarOpen, setSideb
     { id: 'tasks', label: 'Task Board', icon: ClipboardList },
     { id: 'payroll', label: 'Payroll Console', icon: CircleDollarSign },
     { id: 'performance', label: 'Performance', icon: BarChart3 },
-    { id: 'audit', label: 'Audit Trail', icon: FileClock },
   ];
 
   const hrMenu = [
