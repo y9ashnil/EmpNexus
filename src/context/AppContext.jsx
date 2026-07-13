@@ -12,7 +12,7 @@ const initialEmployees = [
     role: 'employee',
     department: 'Engineering',
     designation: 'Senior Frontend Dev',
-    salary: 8500,
+    salary: 85000,
     joinDate: '2024-03-15',
     phone: '+1 (555) 019-2834'
   },
@@ -24,7 +24,7 @@ const initialEmployees = [
     role: 'employee',
     department: 'Design',
     designation: 'Lead UI/UX Designer',
-    salary: 7800,
+    salary: 78000,
     joinDate: '2024-08-01',
     phone: '+1 (555) 012-9845'
   },
@@ -36,7 +36,7 @@ const initialEmployees = [
     role: 'employee',
     department: 'Marketing',
     designation: 'Growth Strategist',
-    salary: 6200,
+    salary: 62000,
     joinDate: '2025-01-10',
     phone: '+1 (555) 017-4839'
   }
@@ -127,20 +127,20 @@ const initialPayslips = [
     id: 'PS-401',
     employeeId: 'EMP-001',
     month: 'May 2026',
-    baseSalary: 8500,
-    bonus: 500,
-    deductions: 200,
-    netSalary: 8800,
+    baseSalary: 85000,
+    bonus: 5000,
+    deductions: 2000,
+    netSalary: 88000,
     releasedOn: '2026-05-31'
   },
   {
     id: 'PS-402',
     employeeId: 'EMP-002',
     month: 'May 2026',
-    baseSalary: 7800,
-    bonus: 300,
-    deductions: 150,
-    netSalary: 7950,
+    baseSalary: 78000,
+    bonus: 3000,
+    deductions: 1500,
+    netSalary: 79500,
     releasedOn: '2026-05-31'
   }
 ];
@@ -152,21 +152,21 @@ const initialJobs = [
     title: 'Lead Frontend Developer',
     department: 'Engineering',
     status: 'open',
-    salaryRange: '₹7,000 - ₹10,000'
+    salaryRange: 'Rs. 70000 - Rs. 100000'
   },
   {
     id: 'JOB-902',
     title: 'Senior Product Designer',
     department: 'Design',
     status: 'open',
-    salaryRange: '₹6,500 - ₹9,000'
+    salaryRange: 'Rs. 65000 - Rs. 90000'
   },
   {
     id: 'JOB-903',
     title: 'HR Operations Coordinator',
     department: 'Human Resources',
     status: 'closed',
-    salaryRange: '₹4,500 - ₹6,000'
+    salaryRange: 'Rs. 45000 - Rs. 60000'
   }
 ];
 

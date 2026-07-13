@@ -501,7 +501,7 @@ export default function AdminDashboard({ activeTab }) {
                           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{emp.designation}</div>
                         </div>
                       </td>
-                      <td><strong>₹{emp.salary.toLocaleString()}/mo</strong></td>
+                      <td><strong>Rs. {emp.salary.toLocaleString()}/mo</strong></td>
                       <td>
                         <div style={{ display: 'flex', gap: '6px' }}>
                           <button 
@@ -757,7 +757,7 @@ export default function AdminDashboard({ activeTab }) {
                     return (
                       <tr key={emp.id}>
                         <td><strong>{emp.name}</strong><br /><span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{emp.designation}</span></td>
-                        <td><strong>₹{emp.salary.toLocaleString()}</strong></td>
+                        <td><strong>Rs. {emp.salary.toLocaleString()}</strong></td>
                         <td>
                           <span className="badge badge-info">{count} Slip(s)</span>
                         </td>
@@ -792,7 +792,7 @@ export default function AdminDashboard({ activeTab }) {
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                       <strong style={{ fontSize: '0.875rem' }}>{getEmpName(ps.employeeId)}</strong>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-success)', fontWeight: 700 }}>
-                        ₹{ps.netSalary.toLocaleString()}
+                        Rs. {ps.netSalary.toLocaleString()}
                       </span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -1276,7 +1276,7 @@ export default function AdminDashboard({ activeTab }) {
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Monthly Salary (₹)</label>
+                  <label className="form-label">Monthly Salary (Rs.)</label>
                   <input 
                     type="number" 
                     className="form-input" 
@@ -1335,17 +1335,17 @@ export default function AdminDashboard({ activeTab }) {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className="form-group">
-                  <label className="form-label">Base Salary (₹)</label>
+                  <label className="form-label">Base Salary (Rs.)</label>
                   <input 
                     type="text" 
                     className="form-input" 
-                    value={`₹${payrollEmp.salary.toLocaleString()}`} 
+                    value={`Rs. ${payrollEmp.salary.toLocaleString()}`} 
                     disabled 
                     style={{ background: 'rgba(255,255,255,0.02)', color: 'var(--text-muted)', cursor: 'not-allowed' }}
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Bonus (₹)</label>
+                  <label className="form-label">Bonus (Rs.)</label>
                   <input 
                     type="number" 
                     className="form-input" 
@@ -1357,7 +1357,7 @@ export default function AdminDashboard({ activeTab }) {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Deductions (₹)</label>
+                <label className="form-label">Deductions (Rs.)</label>
                 <input 
                   type="number" 
                   className="form-input" 
@@ -1371,7 +1371,7 @@ export default function AdminDashboard({ activeTab }) {
                 <div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>ESTIMATED DISBURSEMENT</div>
                   <strong style={{ fontSize: '1.25rem', color: 'var(--color-success)' }}>
-                    ₹{(payrollEmp.salary + (parseFloat(payBonus) || 0) - (parseFloat(payDeductions) || 0)).toLocaleString()}
+                    Rs. {(payrollEmp.salary + (parseFloat(payBonus) || 0) - (parseFloat(payDeductions) || 0)).toLocaleString()}
                   </strong>
                 </div>
               </div>

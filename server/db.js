@@ -222,9 +222,9 @@ db.serialize(() => {
 
       // Seed Employees
       const stmt = db.prepare(`INSERT INTO employees VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
-      stmt.run('EMP-001', 'Sarah Connor', 'sarah@ems.com', 'password123', 'employee', 'Senior Software Engineer', 'Engineering', 8500, '2022-04-15', '+1 (555) 019-2831');
-      stmt.run('EMP-002', 'Marcus Wright', 'marcus@ems.com', 'password123', 'employee', 'Product Designer', 'Design', 7200, '2023-01-10', '+1 (555) 021-3948');
-      stmt.run('EMP-003', 'John Connor', 'john@ems.com', 'password123', 'employee', 'Junior Analyst', 'Operations', 4800, '2023-11-01', '+1 (555) 039-4821');
+      stmt.run('EMP-001', 'Sarah Connor', 'sarah@ems.com', 'password123', 'employee', 'Senior Software Engineer', 'Engineering', 85000, '2022-04-15', '+1 (555) 019-2831');
+      stmt.run('EMP-002', 'Marcus Wright', 'marcus@ems.com', 'password123', 'employee', 'Product Designer', 'Design', 72000, '2023-01-10', '+1 (555) 021-3948');
+      stmt.run('EMP-003', 'John Connor', 'john@ems.com', 'password123', 'employee', 'Junior Analyst', 'Operations', 48000, '2023-11-01', '+1 (555) 039-4821');
       stmt.finalize();
 
       // Seed Verifications
@@ -256,14 +256,14 @@ db.serialize(() => {
 
       // Seed Payslips
       const pStmt = db.prepare(`INSERT INTO payslips VALUES (?, ?, ?, ?, ?, ?, ?, ?)`);
-      pStmt.run('PS-401', 'EMP-001', 'June 2026', 8500, 450, 200, 8750, '2026-06-28');
-      pStmt.run('PS-402', 'EMP-002', 'June 2026', 7200, 200, 150, 7250, '2026-06-28');
+      pStmt.run('PS-401', 'EMP-001', 'June 2026', 85000, 4500, 2000, 87500, '2026-06-28');
+      pStmt.run('PS-402', 'EMP-002', 'June 2026', 72000, 2000, 1500, 72500, '2026-06-28');
       pStmt.finalize();
 
       // Seed Jobs
       const jStmt = db.prepare(`INSERT INTO jobs VALUES (?, ?, ?, ?, ?)`);
-      jStmt.run('JOB-501', 'Senior Backend Engineer', 'Engineering', '₹7,000 - ₹9,500', 'open');
-      jStmt.run('JOB-502', 'Lead UI/UX Designer', 'Design', '₹6,500 - ₹8,500', 'open');
+      jStmt.run('JOB-501', 'Senior Backend Engineer', 'Engineering', 'Rs. 70000 - Rs. 95000', 'open');
+      jStmt.run('JOB-502', 'Lead UI/UX Designer', 'Design', 'Rs. 65000 - Rs. 85000', 'open');
       jStmt.finalize();
 
       // Seed Candidates
